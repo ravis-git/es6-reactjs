@@ -1,23 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-class Profile extends React.Component {
-    render() {
-        let hobbies = this.props.hobbies.map((hobby, index) => {
-            return <li key={index}>{hobby}</li>
-        })
-        return (
-            <div>
-                <h3>{this.props.name} : {this.props.age}</h3>
-                <p>{this.props.bio}</p>
-                <h4>Hobbies</h4>
-                <ul>
-                    {hobbies}
-                </ul>
-            </div>                
-        )        
-    }
-}
+import Profile from './components/Profile.jsx'
+import AddProfile from './components/AddProfile.jsx'
 
 class App extends React.Component {
     constructor(props) {
@@ -25,34 +9,52 @@ class App extends React.Component {
         this.state = {
             profiles: [
                 {
-                    name: 'Ashwini', 
+                    name: 'User1', 
                     age: 30, 
                     hobbies: ['swimming', 'biking'],
                     bio: 'enjoys swimming & biking'
                 },
                 {
-                    name: 'Ravi',
+                    name: 'User2',
                     age: 35,
                     hobbies: ['gardening','sports'],
                     bio: 'enjoys gardening & sports'
                 }
             ]
         }
+        this.addUser = this.addUser.bind(this)
+    }
+
+    addUser(e) {
+        var user = {
+            name: 'User3',
+            age: 15,
+            bio: 'So many users .. so little code',
+            hobbies: ['one', 'two']
+        }
+        this.setState({
+            profiles: this.state.profiles.concat([user])
+        })
     }
 
     render () {
         let profile0 = this.state.profiles[0]
         let profile1 = this.state.profiles[1]
         let profiles = this.state.profiles.map(profile => {
-            return <Profile 
+            return (
+                <div>
+                    <Profile 
                         name= {profile.name}
                         age= {profile.age}
                         bio= {profile.bio}
                         hobbies = {profile.hobbies} />
+                </div>
+            )
         })
         return (
           <div>
               {profiles}
+             <AddProfile addUser={this.addUser} />
           </div>  
         )
     }
