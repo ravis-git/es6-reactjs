@@ -1,4 +1,5 @@
 import React from 'react'
+import AddProfile from './AddProfile.jsx'
 
 export default class Profile extends React.Component {
     render() {
@@ -12,6 +13,7 @@ export default class Profile extends React.Component {
                 <h4>Hobbies</h4>
                 <ul>
                     {hobbies}
+                    {/*<button onClick={this.addUser}>Add New user</button>*/}
                 </ul>
             </div>                
         )        
